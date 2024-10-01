@@ -1,0 +1,16 @@
+{
+  "name": "bnj",
+  "version": "1.0.0",
+  "description": "Personal website",
+  "main": "index.js",
+  "scripts": {
+    "build": "pnpx tailwindcss -i ./style/input.scss -o ./style/main.scss",
+    "watch": "pnpx tailwindcss -i ./style/input.scss -o ./style/main.scss --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.13"
+  }
+}
