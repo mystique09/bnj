@@ -63,7 +63,7 @@ WORKDIR /app
 
 # Copy the binary from the builder stage.
 COPY --from=builder /usr/src/bnj/target/release/bnj .
-COPY --from=builder /usr/src/bnj/target/site ./site
+COPY --from=builder /usr/src/bnj/target/site/ ./site
 COPY --from=builder /usr/src/bnj/startup.sh .
 COPY --from=builder /usr/src/bnj/.env .
 
