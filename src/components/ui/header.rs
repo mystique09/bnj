@@ -4,7 +4,7 @@ use leptos::*;
 pub fn Header() -> impl IntoView {
     view! {
         <header class="w-full h-fit max-w-3xl mx-auto py-20 px-4 xl:px-0">
-            <div class="flex items-center justify-between h-12 bg-white px-12 rounded-full">
+            <div class="flex items-center justify-between h-12 bg-white px-12 rounded-full shadow-lg">
                 <Logo />
                 <NavLinks />
             </div>
