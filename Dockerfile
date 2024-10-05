@@ -7,7 +7,6 @@ COPY . .
 RUN apt-get update && apt-get install -y --no-install-recommends \
     musl-dev \
     bash \
-    nodejs \
     libssl-dev \
     pkg-config \
     gcc \
@@ -39,6 +38,8 @@ RUN curl -LO https://github.com/cargo-bins/cargo-binstall/releases/latest/downlo
 RUN cargo binstall -y cargo-leptos
 
 # Install rust nightly and wasm
+
+RUN apt-get install -y nodejs
 
 # Install pnpm dependencies
 RUN npm install
