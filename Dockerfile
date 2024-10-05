@@ -7,7 +7,7 @@ COPY . .
 
 RUN npm install
 
-RUN npm build
+RUN npm run build
 
 FROM rust:1.79.0-slim-bullseye AS builder
 
