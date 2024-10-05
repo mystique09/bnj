@@ -38,8 +38,13 @@ ENV LEPTOS_OUTPUT_NAME=$LEPTOS_OUTPUT_NAME \
     
 RUN cp ./.env.example ./.env
 
+# Install cargo-binstall
+RUN curl -LO https://github.com/cargo-bins/cargo-binstall/releases/latest/download/cargo-binstall-x86_64-unknown-linux-gnu.tgz \
+    && tar -xvf cargo-binstall-x86_64-unknown-linux-gnu.tgz \
+    && cp cargo-binstall /usr/local/cargo/bin
+
 # Install necesary dependencies.
-RUN cargo install cargo-leptos
+RUN cargo binstall -y cargo-leptos
 
 # Install rust nightly and wasm
 
