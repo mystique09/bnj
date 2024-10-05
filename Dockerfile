@@ -41,7 +41,7 @@ RUN cargo binstall -y cargo-leptos
 # Install rust nightly and wasm
 
 # Install pnpm dependencies
-RUN npm install --frozen-lockfile
+RUN npm install
 
 # Run tailwindcss
 RUN npm build
