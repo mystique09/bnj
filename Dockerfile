@@ -1,7 +1,18 @@
+FROM node:22-bullseye-slim AS tailwind
+
+WORKDIR /tailwind
+
+# Copy the package.json and package-lock.json files
+COPY --from=builder . .
+
+RUN npm install
+
+RUN npm build
+
 FROM rust:1.79.0-slim-bullseye AS builder
 
 WORKDIR /usr/src/bnj
-COPY . .
+COPY --from=tailwind /tailwind .
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -36,12 +47,6 @@ RUN curl -LO https://github.com/cargo-bins/cargo-binstall/releases/latest/downlo
 RUN cargo binstall -y cargo-leptos
 
 # Install rust nightly and wasm
-
-# Install pnpm dependencies
-RUN npm install -g tailwindcss
-
-# Run tailwindcss
-RUN npm build
 
 # Build the binary.
 ENV RUSTFLAGS="-C link-arg=-lssl -C link-arg=-lcrypto"
