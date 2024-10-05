@@ -26,6 +26,7 @@ ENV LEPTOS_OUTPUT_NAME=$LEPTOS_OUTPUT_NAME \
 
 ENV PNPM_HOME="/root/.local/share/pnpm"
 ENV PATH="${PATH}:${PNPM_HOME}"
+ENV SHELL=/bin/sh
     
 RUN cp ./.env.example ./.env
 
