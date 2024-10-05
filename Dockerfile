@@ -3,7 +3,7 @@ FROM node:22-bullseye-slim AS tailwind
 WORKDIR /tailwind
 
 # Copy the package.json and package-lock.json files
-COPY --from=builder . .
+COPY . .
 
 RUN npm install
 
