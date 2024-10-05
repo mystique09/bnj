@@ -7,7 +7,7 @@ COPY . .
 RUN apt-get update && apt-get install -y --no-install-recommends \
     musl-dev \
     bash \
-    nodejs \
+    nodejs-lts \
     libssl-dev \
     pkg-config \
     gcc \
@@ -27,8 +27,6 @@ ENV LEPTOS_OUTPUT_NAME=$LEPTOS_OUTPUT_NAME \
     LEPTOS_RELOAD_PORT=$LEPTOS_RELOAD_PORT
 
 ENV SHELL=/bin/bash
-ENV PNPM_HOME=/root/.local/share/pnpm
-ENV PATH="${PATH}:${PNPM_HOME}"
     
 RUN cp ./.env.example ./.env
 
@@ -42,14 +40,11 @@ RUN cargo binstall -y cargo-leptos
 
 # Install rust nightly and wasm
 
-# # Install pnpm
-RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
-
 # Install pnpm dependencies
-RUN pnpm install --frozen-lockfile
+RUN npm install --frozen-lockfile
 
 # Run tailwindcss
-RUN pnpm build
+RUN npm build
 
 # Build the binary.
 ENV RUSTFLAGS="-C link-arg=-lssl -C link-arg=-lcrypto"
