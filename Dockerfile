@@ -6,7 +6,7 @@ COPY . .
 # Install build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     musl-dev \
-    bash \
+    nodejs \
     libssl-dev \
     pkg-config \
     gcc \
@@ -24,8 +24,6 @@ ENV LEPTOS_OUTPUT_NAME=$LEPTOS_OUTPUT_NAME \
     LEPTOS_SITE_PKG_DIR=$LEPTOS_SITE_PKG_DIR \
     LEPTOS_SITE_ADDR=$LEPTOS_SITE_ADDR \
     LEPTOS_RELOAD_PORT=$LEPTOS_RELOAD_PORT
-
-ENV SHELL=/bin/bash
     
 RUN cp ./.env.example ./.env
 
