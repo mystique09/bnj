@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - LEPTOS_OUTPUT_NAME=${LEPTOS_OUTPUT_NAME}
+        - LEPTOS_SITE_ROOT=${LEPTOS_SITE_ROOT}
+        - LEPTOS_SITE_PKG_DIR=${LEPTOS_SITE_PKG_DIR}
+        - LEPTOS_SITE_ADDR=${LEPTOS_SITE_ADDR}
+        - LEPTOS_RELOAD_PORT=${LEPTOS_RELOAD_PORT}
+    env_file: 
+      - .env
+    network_mode: host
