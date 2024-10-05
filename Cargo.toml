@@ -18,8 +18,11 @@ tower = { version = "0.4", optional = true, features = ["util"] }
 tower-http = { version = "0.5", features = ["fs"], optional = true }
 wasm-bindgen = "=0.2.93"
 thiserror = "1"
-tracing = { version = "0.1", optional = true }
 http = "1"
+tracing = { version = "0.1.40", optional = true }
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"], optional = true}
+tracing-subscriber-wasm = "0.1.0"
+tailwind_fuse = { version = "0.3.1", features = ["variant"] }
 
 [features]
 hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
@@ -63,7 +66,7 @@ style-file = "style/main.scss"
 assets-dir = "public"
 
 # The IP and port (ex: 127.0.0.1:3000) where the server serves the content. Use it in your server setup.
-site-addr = "127.0.0.1:3000"
+site-addr = "127.0.0.1:8080"
 
 # The port to use for automatic reload monitoring
 reload-port = 3001
