@@ -19,9 +19,6 @@ tower-http = { version = "0.5", features = ["fs"], optional = true }
 wasm-bindgen = "=0.2.93"
 thiserror = "1"
 http = "1"
-tracing = { version = "0.1.40", optional = true }
-tracing-subscriber = { version = "0.3.18", features = ["env-filter"], optional = true}
-tracing-subscriber-wasm = "0.1.0"
 tailwind_fuse = { version = "0.3.1", features = ["variant"] }
 
 [features]
