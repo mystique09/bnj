@@ -4,8 +4,8 @@
   "description": "Personal website",
   "main": "index.js",
   "scripts": {
-    "build": "pnpx tailwindcss -i ./style/input.scss -o ./style/main.scss",
-    "watch": "pnpx tailwindcss -i ./style/input.scss -o ./style/main.scss --watch"
+    "build": "tailwindcss -i ./style/input.scss -o ./style/main.scss",
+    "watch": "tailwindcss -i ./style/input.scss -o ./style/main.scss --watch"
   },
   "keywords": [],
   "author": "",

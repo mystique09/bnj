@@ -37,10 +37,8 @@ RUN cargo binstall -y cargo-leptos
 
 # Install rust nightly and wasm
 
-RUN apt-get install -y nodejs
-
 # Install pnpm dependencies
-RUN npm install
+RUN npm install -g tailwindcss
 
 # Run tailwindcss
 RUN npm build
