@@ -7,6 +7,7 @@ COPY . .
 RUN apt-get update && apt-get install -y --no-install-recommends \
     musl-dev \
     bash \
+    nodejs \
     libssl-dev \
     pkg-config \
     gcc \
