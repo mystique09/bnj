@@ -44,9 +44,6 @@ RUN cargo binstall -y cargo-leptos
 # # Install pnpm
 RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
 
-# Install tailwindcss
-RUN pnpm install -g tailwindcss
-
 # Run tailwindcss
 RUN pnpm build
 
