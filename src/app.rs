@@ -54,7 +54,7 @@ fn HomePage() -> impl IntoView {
     view! {
         <section class="relative w-full h-full max-w-3xl mx-auto">
             <Grid cols=12 rows=3 gap=6 class="w-full h-full">
-                <Container max_width="[432px]" class="h-[432px] p-6 w-full bg-white rounded-2xl mx-0 shadow-sm col-start-1 col-span-7 row-start-1 row-span-8 shadow-none hover:shadow-lg duration-300 ease-in-out transition-all">
+                <Container max_width="[432px]" class="h-[432px] p-6 w-full bg-white rounded-2xl mx-0 shadow-sm col-start-1 col-span-6 row-start-1 row-span-8 shadow-none hover:shadow-lg duration-300 ease-in-out transition-all">
                     <Flex direction="col".into() gap=4 class="relative w-full h-full">
                         <Heading class="text-2xl font-bold uppercase text-accent">About Me.</Heading>
                         <p>
@@ -70,7 +70,7 @@ fn HomePage() -> impl IntoView {
                         </p>
                     </Flex>
                 </Container>
-                <Container max_width="[432px]" class="w-full bg-white h-[240px] p-6 rounded-2xl shadow-sm row-start-3 col-start-1 col-span-7 shadow-none hover:shadow-lg duration-300 ease-in-out transition-all">
+                <Container max_width="[432px]" class="w-full bg-white h-[240px] p-6 rounded-2xl shadow-sm row-start-3 col-start-1 col-span-6 shadow-none hover:shadow-lg duration-300 ease-in-out transition-all">
                     <Flex direction="col".into() gap=4 class="relative w-full h-full">
                         <Heading class="text-2xl font-bold uppercase text-accent">"Let's connect."</Heading>
                         <p>
