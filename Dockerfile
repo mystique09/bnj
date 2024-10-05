@@ -24,9 +24,9 @@ ENV LEPTOS_OUTPUT_NAME=$LEPTOS_OUTPUT_NAME \
     LEPTOS_SITE_ADDR=$LEPTOS_SITE_ADDR \
     LEPTOS_RELOAD_PORT=$LEPTOS_RELOAD_PORT
 
-ENV PNPM_HOME="/root/.local/share/pnpm"
-ENV PATH="${PATH}:${PNPM_HOME}"
 ENV SHELL=/bin/sh
+ENV PNPM_HOME=/root/.local/share/pnpm
+ENV PATH="${PATH}:${PNPM_HOME}"
     
 RUN cp ./.env.example ./.env
 
