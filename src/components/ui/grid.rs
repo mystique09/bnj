@@ -109,14 +109,182 @@ impl From<&str> for PlaceSelf {
     }
 }
 
+#[derive(TwVariant)]
+pub enum Gap {
+    #[tw(default, class = "")]
+    None,
+    #[tw(class = "gap-0")]
+    Zero,
+    #[tw(class = "gap-1")]
+    One,
+    #[tw(class = "gap-2")]
+    Two,
+    #[tw(class = "gap-3")]
+    Three,
+    #[tw(class = "gap-4")]
+    Four,
+    #[tw(class = "gap-5")]
+    Five,
+    #[tw(class = "gap-6")]
+    Six,
+    #[tw(class = "gap-7")]
+    Seven,
+    #[tw(class = "gap-8")]
+    Eight,
+    #[tw(class = "gap-9")]
+    Nine,
+    #[tw(class = "gap-10")]
+    Ten,
+    #[tw(class = "gap-11")]
+    Eleven,
+    #[tw(class = "gap-12")]
+    Twelve,
+    #[tw(class = "gap-14")]
+    Fourteen,
+    #[tw(class = "gap-16")]
+    Sixteen,
+}
+
+impl From<u8> for Gap {
+    fn from(s: u8) -> Self {
+        match s {
+            0 => Self::Zero,
+            1 => Self::One,
+            2 => Self::Two,
+            3 => Self::Three,
+            4 => Self::Four,
+            5 => Self::Five,
+            6 => Self::Six,
+            7 => Self::Seven,
+            8 => Self::Eight,
+            9 => Self::Nine,
+            10 => Self::Ten,
+            11 => Self::Eleven,
+            12 => Self::Twelve,
+            14 => Self::Fourteen,
+            16 => Self::Sixteen,
+            _ => {
+                logging::debug_warn!("invalid gap: {}", s);
+                Self::None
+            }
+        }
+    }
+}
+
+#[derive(TwVariant)]
+pub enum Cols {
+    #[tw(class = "grid-cols-1")]
+    One,
+    #[tw(class = "grid-cols-2")]
+    Two,
+    #[tw(class = "grid-cols-3")]
+    Three,
+    #[tw(class = "grid-cols-4")]
+    Four,
+    #[tw(class = "grid-cols-5")]
+    Five,
+    #[tw(class = "grid-cols-6")]
+    Six,
+    #[tw(class = "grid-cols-7")]
+    Seven,
+    #[tw(class = "grid-cols-8")]
+    Eight,
+    #[tw(class = "grid-cols-9")]
+    Nine,
+    #[tw(class = "grid-cols-10")]
+    Ten,
+    #[tw(class = "grid-cols-11")]
+    Eleven,
+    #[tw(class = "grid-cols-12")]
+    Twelve,
+    #[tw(default, class = "")]
+    None,
+}
+
+impl From<u8> for Cols {
+    fn from(s: u8) -> Self {
+        match s {
+            1 => Self::One,
+            2 => Self::Two,
+            3 => Self::Three,
+            4 => Self::Four,
+            5 => Self::Five,
+            6 => Self::Six,
+            7 => Self::Seven,
+            8 => Self::Eight,
+            9 => Self::Nine,
+            10 => Self::Ten,
+            11 => Self::Eleven,
+            12 => Self::Twelve,
+            _ => {
+                logging::debug_warn!("invalid cols: {}", s);
+                Self::None
+            }
+        }
+    }
+}
+
+#[derive(TwVariant)]
+pub enum Rows {
+    #[tw(class = "grid-rows-1")]
+    One,
+    #[tw(class = "grid-rows-2")]
+    Two,
+    #[tw(class = "grid-rows-3")]
+    Three,
+    #[tw(class = "grid-rows-4")]
+    Four,
+    #[tw(class = "grid-rows-5")]
+    Five,
+    #[tw(class = "grid-rows-6")]
+    Six,
+    #[tw(class = "grid-rows-7")]
+    Seven,
+    #[tw(class = "grid-rows-8")]
+    Eight,
+    #[tw(class = "grid-rows-9")]
+    Nine,
+    #[tw(class = "grid-rows-10")]
+    Ten,
+    #[tw(class = "grid-rows-11")]
+    Eleven,
+    #[tw(class = "grid-rows-12")]
+    Twelve,
+    #[tw(default, class = "")]
+    None,
+}
+
+impl From<u8> for Rows {
+    fn from(s: u8) -> Self {
+        match s {
+            1 => Self::One,
+            2 => Self::Two,
+            3 => Self::Three,
+            4 => Self::Four,
+            5 => Self::Five,
+            6 => Self::Six,
+            7 => Self::Seven,
+            8 => Self::Eight,
+            9 => Self::Nine,
+            10 => Self::Ten,
+            11 => Self::Eleven,
+            12 => Self::Twelve,
+            _ => {
+                logging::debug_warn!("invalid rows: {}", s);
+                Self::None
+            }
+        }
+    }
+}
+
 #[component]
 pub fn Grid<'a>(
     #[prop(optional)] _ref: Ref,
     #[prop(optional)] class: &'a str,
     #[prop(attrs)] attributes: Vec<(&'static str, Attribute)>,
-    #[prop(optional)] cols: u8,
-    #[prop(optional)] rows: u8,
-    #[prop(optional)] gap: u8,
+    #[prop(optional)] cols: Cols,
+    #[prop(optional)] rows: Rows,
+    #[prop(optional)] gap: Gap,
     #[prop(optional)] place_content: PlaceContent,
     #[prop(optional)] place_items: PlaceItems,
     #[prop(optional)] place_self: PlaceSelf,
@@ -129,14 +297,11 @@ pub fn Grid<'a>(
     } else {
         _ref
     };
-    let _gap = format!("gap-{}", gap);
-    let _cols = format!("grid-cols-{}", cols);
-    let _rows = format!("grid-rows-{}", rows);
     let _class = tw_merge!(
         "grid",
-        _gap,
-        _cols,
-        _rows,
+        cols,
+        rows,
+        gap,
         place_self,
         place_items,
         place_content,
