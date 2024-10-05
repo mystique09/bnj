@@ -9,6 +9,10 @@ module.exports = {
                 accent: "#FF204E",
                 text: "#45474B",
                 "light": "#E8EEF4"
+            },
+            fontFamily: {
+                "space-mono": ["Space Mono", "monospace"],
+                "space-grotesk": ["Space Grotesk", "sans-serif"],
             }
         },
     },
