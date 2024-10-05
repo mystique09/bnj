@@ -25,7 +25,7 @@ ENV LEPTOS_OUTPUT_NAME=$LEPTOS_OUTPUT_NAME \
     LEPTOS_SITE_ADDR=$LEPTOS_SITE_ADDR \
     LEPTOS_RELOAD_PORT=$LEPTOS_RELOAD_PORT
 
-# ENV SHELL=/bin/sh
+ENV SHELL=/bin/bash
 ENV PNPM_HOME=/root/.local/share/pnpm
 ENV PATH="${PATH}:${PNPM_HOME}"
     
@@ -35,8 +35,6 @@ RUN cp ./.env.example ./.env
 RUN curl -LO https://github.com/cargo-bins/cargo-binstall/releases/latest/download/cargo-binstall-x86_64-unknown-linux-gnu.tgz \
     && tar -xvf cargo-binstall-x86_64-unknown-linux-gnu.tgz \
     && cp cargo-binstall /usr/local/cargo/bin
-
-SHELL ["/bin/bash", "-c"]
 
 # Install necesary dependencies.
 RUN cargo binstall -y cargo-leptos
