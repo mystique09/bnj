@@ -51,7 +51,6 @@ RUN cargo binstall -y cargo-leptos
 # Install rust nightly and wasm
 
 # Build the binary.
-ENV RUSTFLAGS="-C link-arg=-lssl -C link-arg=-lcrypto"
 RUN cargo leptos build --release
 
 # Second stage building, to avoid bloated binary.
