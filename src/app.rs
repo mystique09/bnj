@@ -19,9 +19,26 @@ pub fn App() -> impl IntoView {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/bnj.css"/>
-        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-wght-normal.woff2"/>
+        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-300-normal.woff2"/>
+        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-400-normal.woff2"/>
+        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-500-normal.woff2"/>
+        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-600-normal.woff2"/>
+        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-700-normal.woff2"/>
+
+        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-300-normal.woff"/>
+        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-400-normal.woff"/>
+        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-500-normal.woff"/>
+        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-600-normal.woff"/>
+        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-700-normal.woff"/>
+
         <Stylesheet href="/fonts/space-mono/space-mono-latin-400-normal.woff2"/>
         <Stylesheet href="/fonts/space-mono/space-mono-latin-400-normal.woff"/>
+        <Stylesheet href="/fonts/space-mono/space-mono-latin-400-italic.woff2"/>
+        <Stylesheet href="/fonts/space-mono/space-mono-latin-400-italic.woff"/>
+        <Stylesheet href="/fonts/space-mono/space-mono-latin-700-normal.woff2"/>
+        <Stylesheet href="/fonts/space-mono/space-mono-latin-700-normal.woff"/>
+        <Stylesheet href="/fonts/space-mono/space-mono-latin-700-italic.woff2"/>
+        <Stylesheet href="/fonts/space-mono/space-mono-latin-700-italic.woff"/>
 
         // sets the document title
         <Title text="Welcome to Leptos"/>
