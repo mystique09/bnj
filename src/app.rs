@@ -4,9 +4,13 @@ use crate::{
     },
     error_template::{AppError, ErrorTemplate},
 };
-use leptos::*;
+use leptos::logging;
+use leptos::prelude::*;
 use leptos_meta::*;
-use leptos_router::*;
+use leptos_router::{
+    components::{FlatRoutes, Route, Router},
+    StaticSegment,
+};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -14,50 +18,50 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-
-
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
-        <Stylesheet id="leptos" href="/pkg/bnj.css"/>
-        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-300-normal.woff2"/>
-        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-400-normal.woff2"/>
-        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-500-normal.woff2"/>
-        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-600-normal.woff2"/>
-        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-700-normal.woff2"/>
+        <head>
+            <Stylesheet id="leptos" href="/pkg/bnj.css"/>
+            <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-300-normal.woff2"/>
+            <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-400-normal.woff2"/>
+            <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-500-normal.woff2"/>
+            <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-600-normal.woff2"/>
+            <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-700-normal.woff2"/>
 
-        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-300-normal.woff"/>
-        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-400-normal.woff"/>
-        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-500-normal.woff"/>
-        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-600-normal.woff"/>
-        <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-700-normal.woff"/>
+            <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-300-normal.woff"/>
+            <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-400-normal.woff"/>
+            <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-500-normal.woff"/>
+            <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-600-normal.woff"/>
+            <Stylesheet href="/fonts/space-grotesk/space-grotesk-latin-700-normal.woff"/>
 
-        <Stylesheet href="/fonts/space-mono/space-mono-latin-400-normal.woff2"/>
-        <Stylesheet href="/fonts/space-mono/space-mono-latin-400-normal.woff"/>
-        <Stylesheet href="/fonts/space-mono/space-mono-latin-400-italic.woff2"/>
-        <Stylesheet href="/fonts/space-mono/space-mono-latin-400-italic.woff"/>
-        <Stylesheet href="/fonts/space-mono/space-mono-latin-700-normal.woff2"/>
-        <Stylesheet href="/fonts/space-mono/space-mono-latin-700-normal.woff"/>
-        <Stylesheet href="/fonts/space-mono/space-mono-latin-700-italic.woff2"/>
-        <Stylesheet href="/fonts/space-mono/space-mono-latin-700-italic.woff"/>
+            <Stylesheet href="/fonts/space-mono/space-mono-latin-400-normal.woff2"/>
+            // <Stylesheet href="/fonts/space-mono/space-mono-latin-400-normal.woff"/>
+            <Stylesheet href="/fonts/space-mono/space-mono-latin-400-italic.woff2"/>
+            // <Stylesheet href="/fonts/space-mono/space-mono-latin-400-italic.woff"/>
+            <Stylesheet href="/fonts/space-mono/space-mono-latin-700-normal.woff2"/>
+            // <Stylesheet href="/fonts/space-mono/space-mono-latin-700-normal.woff"/>
+            <Stylesheet href="/fonts/space-mono/space-mono-latin-700-italic.woff2"/>
+            // <Stylesheet href="/fonts/space-mono/space-mono-latin-700-italic.woff"/>
 
-        // sets the document title
-        <Title text="Welcome to Leptos"/>
+            // sets the document title
+            <Title text="Welcome to Leptos"/>
+        </head>
 
         // content for this welcome page
-        <Router fallback=|| {
-            let mut outside_errors = Errors::default();
-            outside_errors.insert_with_default_key(AppError::NotFound);
-            view! {
-                <ErrorTemplate outside_errors/>
-            }
-            .into_view()
-        }>
+        <Router>
             <Header />
             <main>
-                <Routes>
-                    <Route path="" view=HomePage/>
-                    <Route path="/test" view=TestPage/>
-                </Routes>
+                <FlatRoutes fallback=|| {
+                    let mut outside_errors = Errors::default();
+                    outside_errors.insert_with_default_key(AppError::NotFound);
+                    view! {
+                        <ErrorTemplate outside_errors/>
+                    }
+                    .into_view()
+                }>
+                    <Route path=StaticSegment("") view=HomePage/>
+                    <Route path=StaticSegment("/test") view=TestPage/>
+                </FlatRoutes>
             </main>
         </Router>
     }
@@ -110,7 +114,49 @@ fn HomePage() -> impl IntoView {
 
 #[component]
 fn TestPage() -> impl IntoView {
+    logging::log!("Hello from TestPage");
+    let (image_file, set_image_file) = signal::<Option<String>>(None);
+    let (name, set_name) = signal("test".to_string());
+
     view! {
         <h1>"Test Page"</h1>
+            <input
+                type="file"
+                accept="image/*"
+                on:input:target=move |ev| {
+                    ev.prevent_default();
+                    logging::log!("event {:?}", ev.value_of());
+                    set_name("test2".to_string());
+                }
+            />
+            <input type="text"
+            // fire an event whenever the input changes
+            // adding :target after the event gives us access to
+            // a correctly-typed element at ev.target()
+            on:input:target=move |ev| {
+                set_name.set(ev.target().value());
+            }
+
+            // the `prop:` syntax lets you update a DOM property,
+            // rather than an attribute.
+            //
+            // IMPORTANT: the `value` *attribute* only sets the
+            // initial value, until you have made a change.
+            // The `value` *property* sets the current value.
+            // This is a quirk of the DOM; I didn't invent it.
+            // Other frameworks gloss this over; I think it's
+            // more important to give you access to the browser
+            // as it really works.
+            //
+            // tl;dr: use prop:value for form inputs
+            prop:value=name
+        />
+            <input type="submit" value="Upload"/>
+        <img
+            id="image-preview"
+            src=image_file
+            alt="Preview Image"
+        />
+        <p>{name}</p>
     }
 }

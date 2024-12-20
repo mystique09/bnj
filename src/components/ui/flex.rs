@@ -1,5 +1,4 @@
-use html::Div;
-use leptos::*;
+use leptos::{html::Div, logging, prelude::*};
 use tailwind_fuse::{tw_merge, AsTailwindClass, TwVariant};
 
 type Ref = NodeRef<Div>;
@@ -111,14 +110,13 @@ impl<'a> From<&'a str> for Justify {
 pub fn Flex<'a>(
     #[prop(optional)] _ref: Ref,
     #[prop(optional)] class: &'a str,
-    #[prop(attrs)] attributes: Vec<(&'static str, Attribute)>,
     #[prop(optional)] direction: FlexDirection,
     #[prop(optional)] align: Align,
     #[prop(optional)] justify: Justify,
     #[prop(optional)] gap: u8,
     children: Children,
 ) -> impl IntoView {
-    let _node_ref: Ref = create_node_ref();
+    let _node_ref: Ref = NodeRef::new();
     let prop_ref = move || _ref.get_untracked();
     let __ref = if prop_ref().is_none() {
         _node_ref
@@ -129,7 +127,7 @@ pub fn Flex<'a>(
     let _class = tw_merge!("flex", direction, _gap, align, justify, class);
 
     return view! {
-        <div {..attributes} node_ref=__ref class=_class>
+        <div node_ref=__ref class=_class>
             {children()}
         </div>
     };

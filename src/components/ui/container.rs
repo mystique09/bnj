@@ -1,5 +1,4 @@
-use html::Div;
-use leptos::*;
+use leptos::{html::Div, prelude::*};
 use tailwind_fuse::tw_merge;
 
 type Ref = NodeRef<Div>;
@@ -8,11 +7,10 @@ type Ref = NodeRef<Div>;
 pub fn Container<'a>(
     #[prop(optional)] class: &'a str,
     #[prop(optional)] _ref: Ref,
-    #[prop(attrs)] attributes: Vec<(&'static str, Attribute)>,
     #[prop(optional)] max_width: &'a str,
     children: Children,
 ) -> impl IntoView {
-    let default_ref: Ref = create_node_ref();
+    let default_ref: Ref = NodeRef::new();
     let prop_ref = move || _ref.get_untracked();
     let _node_ref = if prop_ref().is_some() {
         _ref
@@ -27,7 +25,7 @@ pub fn Container<'a>(
     );
 
     view! {
-        <div {..attributes} _ref=_node_ref class=_class>
+        <div node_ref=_node_ref class=_class>
             {children()}
         </div>
     }
